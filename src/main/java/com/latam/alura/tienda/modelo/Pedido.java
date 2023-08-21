@@ -3,6 +3,7 @@ package com.latam.alura.tienda.modelo;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,15 +16,20 @@ public class Pedido {
     private BigDecimal valorTotal;
     @ManyToOne
     private Cliente cliente;
-    @ManyToMany
-    @JoinTable(name="items_productos")
-    private List<Producto> productos;
+
+    @OneToMany(mappedBy="pedido")
+    private List<ItemPedido> items = new ArrayList<>();
 
 
     public Pedido(){}
 
     public Pedido (Cliente cliente){
         this.cliente = cliente;
+    }
+
+    public void agregarItems(ItemPedido item){
+        item.setPedido(this);
+        this.items.add(item);
     }
 
     public long getId() {
