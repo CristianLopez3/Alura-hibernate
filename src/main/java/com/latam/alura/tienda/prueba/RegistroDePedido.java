@@ -10,6 +10,7 @@ import com.latam.alura.tienda.utils.JPAUtils;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
+import java.util.List;
 
 public class RegistroDePedido {
 
@@ -36,11 +37,27 @@ public class RegistroDePedido {
         entityManager.getTransaction().commit();
         /*-----------------------------------------------------------------------------------*/
 
+        BigDecimal valorTotal = pedidoDao.valorTotalVendido();
+        System.out.println(valorTotal);
+
+        /*-----------------------------------------------------------------------------------*/
+
+        List<Object[]> relatorio = pedidoDao.relatorioDeVentas();
+        relatorio.forEach(objects -> {
+            System.out.println(objects[0]);
+            System.out.println(objects[1]);
+            System.out.println(objects[2]);
+        });
+
+        /*-----------------------------------------------------------------------------------*/
+
+
+
     }
 
     public static void registrarProducto(){
         Categoria celulares = new Categoria("Celulares");
-        Producto celular = new Producto("Samsung", "Celular usado", new BigDecimal(1000), celulares);
+        Producto celular = new Producto("Samsung", "Celular usado", new BigDecimal(9000), celulares);
         Producto computador = new Producto("Dell", "Dell ultima generacion", new BigDecimal(2000), celulares);
 
         EntityManager entityManager = JPAUtils.getEntityManager();
@@ -57,4 +74,16 @@ public class RegistroDePedido {
         entityManager.close();
         /*-------------------------------------------*/
     }
+
 }
+
+
+
+
+
+
+
+
+
+
+
