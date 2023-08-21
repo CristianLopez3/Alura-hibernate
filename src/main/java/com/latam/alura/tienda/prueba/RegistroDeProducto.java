@@ -8,37 +8,40 @@ import com.latam.alura.tienda.utils.JPAUtils;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
+import java.util.List;
 
 public class RegistroDeProducto {
 
     public static void main(String args[]){
+        registrarProducto();
+        EntityManager entityManager = JPAUtils.getEntityManager();
+        ProductoDao productoDao = new ProductoDao(entityManager);
+        Producto producto = productoDao.consultarPorId(1l);
+        System.out.println(producto.getNombre());
+
+        // List<Producto> productos = productoDao.consultarPorNombreCategoria("Dell");
+        BigDecimal precio = productoDao.consultarPrecioPorNombre("Samsung");
+        System.out.println(precio);
+    }
+
+    public static void registrarProducto(){
         Categoria celulares = new Categoria("Celulares");
+        Producto celular = new Producto("Samsung", "Celular usado", new BigDecimal(1000), celulares);
+        Producto computador = new Producto("Dell", "Dell ultima generacion", new BigDecimal(2000), celulares);
 
         EntityManager entityManager = JPAUtils.getEntityManager();
-
         ProductoDao productoDao = new ProductoDao(entityManager);
         CategoriaDao categoriaDao = new CategoriaDao(entityManager);
-
 
         entityManager.getTransaction().begin();
         /*-------------------------------------------*/
         categoriaDao.guardar(celulares);
-        celulares.setNombre("LIBROS");
+        productoDao.guardar(celular);
+        productoDao.guardar(computador);
         /*-------------------------------------------*/
-        entityManager.flush();
-        entityManager.clear();  // --> Pasamos la entidad a estado detached
+        entityManager.getTransaction().commit(); // --> Pasamos la entidad a estado detached
+        entityManager.close();
         /*-------------------------------------------*/
-        celulares.setNombre("Software");  // -> para actualizar el dato, primero tenemos que estar en estado managed.
-        celulares = entityManager.merge(celulares); // --> Pasamos la entidad a estado persistente o managed.
-        entityManager.flush(); // --> Sincronizamos los datos con la base de datos.
-        entityManager.clear(); // --> Pasamos los datos a estado detached.
-        /*-------------------------------------------*/
-        celulares = entityManager.merge(celulares);
-        entityManager.remove(celulares);
-        entityManager.flush();
-        // entityManager.commit(); --> No permite hacer un rollback.
-        /*-------------------------------------------*/
-
     }
 
 
