@@ -5,7 +5,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
- @Table(name="productos")
+@Table(name="productos")
+@NamedQuery(name="Producto.consultarNombrePorPrecio", query="SELECT P.precio FROM Producto AS P WHERE P.nombre = :nombre")
 public class Producto {
 
     @Id

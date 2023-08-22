@@ -6,6 +6,7 @@ import com.latam.alura.tienda.dao.PedidoDao;
 import com.latam.alura.tienda.dao.ProductoDao;
 import com.latam.alura.tienda.modelo.*;
 import com.latam.alura.tienda.utils.JPAUtils;
+import com.latam.alura.tienda.vo.RelatorioDeVentas;
 
 
 import javax.persistence.EntityManager;
@@ -51,6 +52,10 @@ public class RegistroDePedido {
 
         /*-----------------------------------------------------------------------------------*/
 
+        List<RelatorioDeVentas> relatorioVO = pedidoDao.relatorioDeVentasVO();
+        relatorioVO.forEach(System.out::println);
+
+        /*-----------------------------------------------------------------------------------*/
 
 
     }
