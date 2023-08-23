@@ -16,7 +16,7 @@ public class PruebaDeDesempeno {
         Pedido pedidoConCliente = pedidoDao.consultarPedidoPorCliente(3L);
 
         /**
-         *Con el fin de ver que pasa cuando pasamos los datos de lazy a eager, cerramos la
+         * Con el fin de ver que pasa cuando pasamos los datos de lazy a eager, cerramos la
          * conexion y vemos como nos ayuda el método que creamos.
          */
         entityManager.close();
