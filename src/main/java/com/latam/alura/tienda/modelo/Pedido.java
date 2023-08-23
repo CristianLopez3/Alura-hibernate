@@ -14,7 +14,7 @@ public class Pedido {
     private long id;
     private LocalDate fecha = LocalDate.now();
     private BigDecimal valorTotal = new BigDecimal(0);
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Cliente cliente;
 
     @OneToMany(mappedBy="pedido", cascade = CascadeType.ALL)
@@ -60,4 +60,10 @@ public class Pedido {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    public List<ItemPedido> getItem(){
+        return this.item;
+    }
+
+
 }

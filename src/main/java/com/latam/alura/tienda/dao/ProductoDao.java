@@ -49,4 +49,5 @@ public class ProductoDao {
                 return entityManager.createNamedQuery("Producto.consultarNombrePorPrecio", BigDecimal.class).setParameter("nombre", nombre).getSingleResult();
         }
 
+
 }

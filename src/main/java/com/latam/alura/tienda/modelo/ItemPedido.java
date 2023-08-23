@@ -1,5 +1,7 @@
 package com.latam.alura.tienda.modelo;
 
+import org.hibernate.annotations.Fetch;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -7,17 +9,14 @@ import java.math.BigDecimal;
 @Table(name="items_pedido")
 public class ItemPedido {
 
-
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private int cantidad;
     private BigDecimal precioUnitario;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Producto producto;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Pedido pedido;
 
     public ItemPedido(){}

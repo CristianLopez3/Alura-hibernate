@@ -8,15 +8,15 @@ import com.latam.alura.tienda.utils.JPAUtils;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
-import java.util.List;
+
 
 public class RegistroDeProducto {
 
-    public static void main(String args[]){
+    public static void main(String[] args){
         registrarProducto();
         EntityManager entityManager = JPAUtils.getEntityManager();
         ProductoDao productoDao = new ProductoDao(entityManager);
-        Producto producto = productoDao.consultarPorId(1l);
+        Producto producto = productoDao.consultarPorId(1L);
         System.out.println(producto.getNombre());
 
         // List<Producto> productos = productoDao.consultarPorNombreCategoria("Dell");
@@ -27,7 +27,7 @@ public class RegistroDeProducto {
     public static void registrarProducto(){
         Categoria celulares = new Categoria("Celulares");
         Producto celular = new Producto("Samsung", "Celular usado", new BigDecimal(1000), celulares);
-        Producto computador = new Producto("Dell", "Dell ultima generacion", new BigDecimal(2000), celulares);
+        Producto computador = new Producto("Dell", "Dell ultima generación", new BigDecimal(2000), celulares);
 
         EntityManager entityManager = JPAUtils.getEntityManager();
         ProductoDao productoDao = new ProductoDao(entityManager);
@@ -39,7 +39,7 @@ public class RegistroDeProducto {
         productoDao.guardar(celular);
         productoDao.guardar(computador);
         /*-------------------------------------------*/
-        entityManager.getTransaction().commit(); // --> Pasamos la entidad a estado detached
+        entityManager.getTransaction().commit(); // --> Pasamos la entidad ha estado detached
         entityManager.close();
         /*-------------------------------------------*/
     }

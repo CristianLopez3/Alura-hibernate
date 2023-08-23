@@ -83,6 +83,15 @@ public class PedidoDao {
     }
 
 
+    /**
+     * Realizamos una consulta planeada para pasar los datos de Lazy a Eager con el join fetch
+     * @param id
+     * @return Pedido.class
+     */
+    public Pedido consultarPedidoPorCliente(Long id){
+        String jpql = "SELECT p FROM Pedido p JOIN FETCH p.cliente WHERE p.id = :id";
+        return entityManager.createQuery(jpql, Pedido.class).setParameter("id", id).getSingleResult();
+    }
 
 
 
