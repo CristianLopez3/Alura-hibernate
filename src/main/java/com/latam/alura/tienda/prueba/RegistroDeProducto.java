@@ -3,6 +3,7 @@ package com.latam.alura.tienda.prueba;
 import com.latam.alura.tienda.dao.CategoriaDao;
 import com.latam.alura.tienda.dao.ProductoDao;
 import com.latam.alura.tienda.modelo.Categoria;
+import com.latam.alura.tienda.modelo.CategoriaId;
 import com.latam.alura.tienda.modelo.Producto;
 import com.latam.alura.tienda.utils.JPAUtils;
 
@@ -22,6 +23,11 @@ public class RegistroDeProducto {
         // List<Producto> productos = productoDao.consultarPorNombreCategoria("Dell");
         BigDecimal precio = productoDao.consultarPrecioPorNombre("Samsung");
         System.out.println(precio);
+
+        System.out.println("-------------------------------------------------------");
+
+        Categoria celulares1 = entityManager.find(Categoria.class, new CategoriaId("Celulares", "123"));
+        System.out.println("Last category input: "+celulares1.getNombre());
     }
 
     public static void registrarProducto(){
@@ -42,6 +48,9 @@ public class RegistroDeProducto {
         entityManager.getTransaction().commit(); // --> Pasamos la entidad ha estado detached
         entityManager.close();
         /*-------------------------------------------*/
+        /*-------------------------------------------*/
+
+
     }
 
 

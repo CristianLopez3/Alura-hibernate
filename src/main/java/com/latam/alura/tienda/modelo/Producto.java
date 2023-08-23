@@ -7,6 +7,8 @@ import java.time.LocalDate;
 @Entity
 @Table(name="productos")
 @NamedQuery(name="Producto.consultarNombrePorPrecio", query="SELECT P.precio FROM Producto AS P WHERE P.nombre = :nombre")
+// we can choose between single_table and join depending on whether we want performance or understanding
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Producto {
 
     @Id
